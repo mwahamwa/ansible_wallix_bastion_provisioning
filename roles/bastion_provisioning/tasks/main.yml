@@ -11,16 +11,13 @@
     status_code: 204
     headers:
       Cookie: "wab_session_id={{ auth_response.cookies['wab_session_id'] }}"
-    body: |
-      {
-        "user_name": "{{ item.user_name }}",
-        "email": "{{ item.user_email }}",
-        "password": "{{ item.user_password }}",
-        "profile": "user",
-        "user_auths": [
-          "local_password"
-        ]
-      }
+    body:
+      user_name: "{{ item.user_name }}"
+      email: "{{ item.user_email }}"
+      password: "{{ item.user_password }}"
+      profile: "user"
+      user_auths:
+        - "local_password"
   loop: "{{ users }}"
   tags: users
 
@@ -33,10 +30,8 @@
     status_code: 204
     headers:
       Cookie: "wab_session_id={{ auth_response.cookies['wab_session_id'] }}"
-    body: |
-      {
-        "device_name": "{{ item.device_name }}",
-        "host": "{{ item.device_host }}"
-      }
+    body:
+      device_name: "{{ item.device_name }}"
+      host: "{{ item.device_host }}"
   loop: "{{ devices }}"
   tags: devices
