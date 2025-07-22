@@ -1,0 +1,20 @@
+# roles/bastion_provisioning/vars/main.yml
+---
+# bastion_url: "https://mybastion.lab/api"
+# api_user: "username"
+# api_password: "usernamepass"
+# users:
+#   - user_name: "toto"
+#     user_email: "toto@toto.com"
+#     user_password: "MyH0lyPass1"
+#   - user_name: "tito"
+#     user_email: "tito@toto.com"
+#     user_password: "MyH0lyPass2"
+# devices:
+#   - device_name: "debian"
+#     device_host: "10.11.12.13"
+#   - device_name: "mailserver"
+#     device_host: "10.11.12.14"
+# bastion_tags:
+#   - users
+#   - devices

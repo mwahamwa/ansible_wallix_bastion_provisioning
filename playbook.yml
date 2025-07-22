@@ -1,0 +1,9 @@
+---
+- name: Playbook pour créer des machine et des utilisateurs dans un Bastion Wallix
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - role: bastion_provisioning
+      tags: "{{ item }}"
+      loop: "{{ bastion_tags }}"

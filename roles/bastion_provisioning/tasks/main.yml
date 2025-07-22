@@ -1,0 +1,42 @@
+---
+- name: Inclure la tâche d'authentification
+  ansible.builtin.include_tasks: auth.yml
+
+- name: "Création des utilisateurs"
+  ansible.builtin.uri:
+    url: "{{ bastion_url }}/users"
+    method: POST
+    body_format: json
+    validate_certs: false
+    status_code: 204
+    headers:
+      Cookie: "wab_session_id={{ auth_response.cookies['wab_session_id'] }}"
+    body: |
+      {
+        "user_name": "{{ item.user_name }}",
+        "email": "{{ item.user_email }}",
+        "password": "{{ item.user_password }}",
+        "profile": "user",
+        "user_auths": [
+          "local_password"
+        ]
+      }
+  loop: "{{ users }}"
+  tags: users
+
+- name: "Création des appareils"
+  ansible.builtin.uri:
+    url: "{{ bastion_url }}/devices"
+    method: POST
+    body_format: json
+    validate_certs: false
+    status_code: 204
+    headers:
+      Cookie: "wab_session_id={{ auth_response.cookies['wab_session_id'] }}"
+    body: |
+      {
+        "device_name": "{{ item.device_name }}",
+        "host": "{{ item.device_host }}"
+      }
+  loop: "{{ devices }}"
+  tags: devices
